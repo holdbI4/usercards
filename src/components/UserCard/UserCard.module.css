@@ -1,0 +1,13 @@
+.userCardInnerCol, .userCardItem {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.userCardItem > :global(.ant-card-actions) {
+    margin-top: auto;
+}
+
+.userCardOuterCol {
+    margin-bottom: 20px;
+}

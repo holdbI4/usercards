@@ -1,8 +1,7 @@
-import {Button, Col, Row, Typography} from "antd";
-import {AddUserModal} from "./AddUserModal.jsx";
+import { Button, Col, Row, Typography } from "antd";
+import { AddUserModal } from "./AddUserModal.jsx";
 import userStore from "../store/User.js";
-import {observer} from "mobx-react-lite";
-
+import { observer } from "mobx-react-lite";
 
 export const Header = observer(() => {
     return (
@@ -16,8 +15,8 @@ export const Header = observer(() => {
                     style={{float: "right"}}
                     onClick={() => userStore.setIsModalOpen(true)}
                 >
-
-                    Create new user</Button>
+                    Create new user
+                </Button>
             </Col>
         </Row>
     )

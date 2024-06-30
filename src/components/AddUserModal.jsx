@@ -1,8 +1,8 @@
-import {Input, Modal, Space} from "antd";
+import { Input, Modal, Space } from "antd";
 import userStore from "../store/User.js";
-import {observer} from "mobx-react-lite";
-import {message} from "antd/lib";
-
+import { observer } from "mobx-react-lite";
+import { message } from "antd/lib";
+import InputMask from 'react-input-mask';
 
 export const AddUserModal = observer(() => {
     const [messageApi, contextHolder] = message.useMessage();
@@ -18,7 +18,6 @@ export const AddUserModal = observer(() => {
                     type: 'success',
                     content: 'New User Created',
                 });
-
             }}
             onCancel={() => userStore.setIsModalOpen(false)}>
 
@@ -26,17 +25,24 @@ export const AddUserModal = observer(() => {
                 <Input
                     value={userStore.firstname}
                     onChange={(e) => userStore.setFirstname(e.target.value)}
-                    placeholder="Enter Firstname" />
+                    placeholder="Enter Firstname"
+                />
                 <Input
                     value={userStore.email}
                     onChange={(e) => userStore.setEmail(e.target.value)}
-                    placeholder="Enter Email" />
-
-
-                <Input
+                    placeholder="Enter Email"
+                />
+                <InputMask
                     value={userStore.phone}
-                    onChange={(e) => userStore.setPhone(Number(e.target.value))}
-                    type="number" placeholder="Enter Number" />
+                    mask="+7(999)-99-99"
+                    placeholder="+7(999)-99-99"
+                    onChange={(e) => userStore.setPhone(e.target.value)}>
+                    {(inputProps) => (
+                        <Input
+                            {...inputProps}
+                        />
+                    )}
+                </InputMask>
             </Space>
         </Modal>
         </>

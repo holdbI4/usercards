@@ -1,12 +1,15 @@
-import {makeAutoObservable} from "mobx";
-
+import { makeAutoObservable } from "mobx";
+import { toJS } from 'mobx'
 
 class UsersStore {
-    users =[]
+    users = [];
 
     constructor() {
-
         makeAutoObservable(this)
+    }
+
+    getUsers() {
+        return toJS(this.users);
     }
 
     setUsers = (users) =>{

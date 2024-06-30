@@ -1,18 +1,20 @@
-import {observer} from "mobx-react-lite";
-import {Button, Card, Popconfirm} from "antd";
+import { observer } from "mobx-react-lite";
+import { Button, Card, Popconfirm } from "antd";
 import Meta from "antd/es/card/Meta.js";
-import {deleteUser} from "../api/index.js";
-import usersStore from "../store/users.js";
-import {DeleteOutlined,} from "@ant-design/icons";
+import { deleteUser } from "../../api/index.js";
+import usersStore from "../../store/users.js";
+import { DeleteOutlined } from "@ant-design/icons";
 
 export const UserCard = observer((props) => {
     const {
-        user
-    }= props
+        user,
+        className
+    } = props;
 
     return (
         <>
             <Card
+                className={className}
                 style={{
                     wordBreak:"break-all"
                 }}
@@ -58,7 +60,6 @@ export const UserCard = observer((props) => {
             >
                 <Meta
                     title={user.firstName}
-
                 />
                 <p>{user.email}</p>
                 <p>{user.phone}</p>

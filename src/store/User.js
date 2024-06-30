@@ -1,53 +1,59 @@
-import {makeAutoObservable} from "mobx";
-import {addUser} from "../api/index.js";
+import { makeAutoObservable } from "mobx";
+import { addUser } from "../api/index.js";
 import usersStore from "./users.js";
 
 class UserStore {
-
-
     isModalOpen = false;
-
     firstname = "";
-    phone = 0;
+    phone = "";
+    email = "";
     username = "";
-    photolink = "";
+
     constructor() {
         makeAutoObservable(this)
-
     }
 
-    setIsModalOpen = (isModalOpen) => {
+    setIsModalOpen(isModalOpen) {
         this.isModalOpen = isModalOpen
     }
-    setFirstname = (firstname) => {
+
+    setFirstname(firstname) {
         this.firstname = firstname
     }
 
-    setEmail = (email) => {
+    setEmail(email) {
         this.email = email
     }
 
-    setPhone = (phone) => {
+    setPhone(phone) {
         this.phone = phone
     }
 
+    clearUserData() {
+        this.isModalOpen = false
+        this.firstname = ""
+        this.email = ""
+        this.phone = ""
+    }
 
-    addNewUser = () => {
-        addUser(this.firstname, this.email, this.phone).then(response =>{
-            console.log(response)
-            usersStore.setUsers([{
-                firstName: this.firstname,
-                email:this.email,
-            },
+    addNewUser(){
+        addUser(this.firstname, this.email, this.phone).then(data =>{
+            const { firstName, email, phone } = data;
+
+            const newUser = {
+                id: Date.now(),
+                firstName,
+                email,
+                phone,
+                image: "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp"
+            };
+
+            usersStore.setUsers([
+                newUser,
                 ...usersStore.users
-            ])
-            this.isModalOpen = false
-            this.firstname = ""
-            this.email = ""
-            this.phone=""
+            ]);
 
-
-
+            this.clearUserData();
         })
     }
 }
